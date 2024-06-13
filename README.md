@@ -2,32 +2,6 @@
 
 Based on React + Typescript + Vite
 
-## Expanding the ESLint configuration
-
-If you are developing a production application, we recommend updating the configuration to enable type aware lint rules:
-
-- Configure the top-level `parserOptions` property like this:
-
-```js
-export default {
-  // other rules...
-  parserOptions: {
-    ecmaVersion: "latest",
-    sourceType: "module",
-    project: [ "./tsconfig.json", "./tsconfig.node.json" ],
-    tsconfigRootDir: __dirname,
-  },
-};
-```
-
-- Replace `plugin:@typescript-eslint/recommended` to `plugin:@typescript-eslint/recommended-type-checked`
-  or `plugin:@typescript-eslint/strict-type-checked`
-- Optionally add `plugin:@typescript-eslint/stylistic-type-checked`
-- Install [eslint-plugin-react](https://github.com/jsx-eslint/eslint-plugin-react) and
-  add `plugin:react/recommended` & `plugin:react/jsx-runtime` to the `extends` list
-
-# Initialize
-
 ## TailwindCss
 
 ```shell
@@ -63,7 +37,7 @@ export default {
 npm install --save-dev --save-exact eslint prettier eslint-config-prettier eslint-plugin-prettier
 touch .prettierignore
 touch .prettierrc
-touch .eslintrc.js
+touch .eslintrc.mjs
 ```
 
 ```js
@@ -90,5 +64,43 @@ export default {
   plugins: [ 'prettier' ],
 };
 
+```
+
+## @ alias
+
+```shell
+// tsconfig.json
+{
+  "compilerOptions": {
+    "paths": {
+      "@/*": [
+        "./src/*"
+      ]
+    }
+  }
+}
+```
+
+```js
+// vite.config.ts
+import { defineConfig } from 'vite';
+import react from '@vitejs/plugin-react';
+import path from 'path';
+
+export default defineConfig({
+  plugins: [ react() ],
+  resolve: {
+    alias: {
+      '@': path.resolve(__dirname, './src'),
+    },
+  },
+});
+
+```
+
+## shadcn/ui
+
+```shell
+npx shadcn-ui@latest init
 
 ```
