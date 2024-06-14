@@ -1,4 +1,4 @@
-# Ins
+# Ins social-media-app
 
 Based on React + Typescript + Vite
 
