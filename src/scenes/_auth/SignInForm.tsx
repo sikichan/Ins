@@ -9,12 +9,11 @@ import {
   FormItem,
   FormLabel,
   FormMessage,
-} from '@/components/ui/form';
-import { Input } from '@/components/ui/input';
-import { Button } from '@/components/ui/button';
-import Loader from '@/components/Loader.tsx';
+  Input,
+  Button,useToast
+} from '@/components/ui';
+import { Loader } from '@/components/shared'
 import { Link, useNavigate } from 'react-router-dom';
-import { useToast } from '@/components/ui/use-toast';
 import { useSignInMutation } from '@/lib/react-query';
 import { useAuthContext } from '@/context/AuthContext.tsx';
 

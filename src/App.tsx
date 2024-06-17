@@ -9,7 +9,6 @@ import { useAuthContext } from '@/context/AuthContext.tsx';
 
 const App = () => {
   const { isAuthenticated } = useAuthContext();
-  console.log(isAuthenticated);
   return (
     <main className="app flex h-screen">
       <Routes>

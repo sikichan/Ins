@@ -91,13 +91,8 @@ export async function getCurrentUser() {
 
 export async function logout() {
   try {
-    const sessionId = localStorage.getItem('ins-session');
-    console.log('session logout: ', sessionId);
-    if (!sessionId) {
-      return true;
-    }
-    await account.deleteSession(sessionId);
-    localStorage.removeItem('ins-session');
+    await account.deleteSession('current');
+    // localStorage.removeItem('ins-session');
     return true;
   } catch (error) {
     console.log(error);
