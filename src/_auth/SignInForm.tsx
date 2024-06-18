@@ -1,7 +1,7 @@
 import { z } from 'zod';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { useForm } from 'react-hook-form';
-import { SignUpValidation } from '@/lib/validation';
+import { LoginValidation } from '@/lib/validation';
 import {
   Form,
   FormControl,
@@ -9,59 +9,53 @@ import {
   FormItem,
   FormLabel,
   FormMessage,
-  Input, Button, useToast
+  Input,
+  Button,useToast
 } from '@/components/ui';
-import {Loader} from '@/components/shared'
+import { Loader } from '@/components/shared'
 import { Link, useNavigate } from 'react-router-dom';
-import {
-  useCreateAccountMutation,
-  useSignInMutation,
-} from '@/lib/react-query';
+import { useSignInMutation } from '@/lib/react-query';
 import { useAuthContext } from '@/context/AuthContext.tsx';
 
-const SignUpForm = () => {
+const SignInForm = () => {
   const { toast } = useToast();
   const navigate = useNavigate();
-  const { checkAuthUser } = useAuthContext();
-  const {
-    mutateAsync: createAccount,
-    isPending: isSigning,
-  } = useCreateAccountMutation();
+  const { checkAuthUser, isLoading } = useAuthContext();
   const {
     mutateAsync: signInAccount,
     isPending: isLogging,
   } = useSignInMutation();
-  const form = useForm<z.infer<typeof SignUpValidation>>({
-    resolver: zodResolver(SignUpValidation),
+  const form = useForm<z.infer<typeof LoginValidation>>({
+    resolver: zodResolver(LoginValidation),
     defaultValues: {
-      name: '',
-      username: '',
       email: '',
       password: '',
     },
   });
 
   const onSubmit = async (
-    values: z.infer<typeof SignUpValidation>
+    values: z.infer<typeof LoginValidation>
   ) => {
-    await createAccount(values);
     const session = await signInAccount({
       email: values.email,
       password: values.password,
     });
     if (!session) {
       return toast({
-        title: 'Sign Up Failed, Please Try Again Later',
+        variant: 'destructive',
+        title:
+          'Log In Failed, Please Check Your Email and Password',
       });
     }
     const isLoggedIn = await checkAuthUser();
     if (isLoggedIn) {
       form.reset();
-      localStorage.setItem('ins-session', session.$id);
       navigate('/');
     } else {
       toast({
-        title: 'Sign Up Failed, Please Try Again Later',
+        variant: 'destructive',
+        description:
+          'Log In Failed, Please Try Again Later',
       });
     }
   };
@@ -75,45 +69,19 @@ const SignUpForm = () => {
             className="w-10 h-10"
             alt="logo"
           />
-          <span>INS App</span>
+          <span>Instagram C</span>
         </div>
         <h1 className="h3-bold md:h2-bold pt-5 sm:pt-12">
-          Create a new account
+          Log in an account
         </h1>
         <p className="text-light-3 small-medium md:base-regular">
-          To use Ins App please enter your details
+          To use Instagram C please enter your details
         </p>
 
         <form
           onSubmit={form.handleSubmit(onSubmit)}
           className="flex flex-col gap-5 w-full mt-4"
         >
-          <FormField
-            control={form.control}
-            name="name"
-            render={({ field }) => (
-              <FormItem>
-                <FormLabel>Name</FormLabel>
-                <FormControl>
-                  <Input type="text" {...field} />
-                </FormControl>
-                <FormMessage />
-              </FormItem>
-            )}
-          />
-          <FormField
-            control={form.control}
-            name="username"
-            render={({ field }) => (
-              <FormItem>
-                <FormLabel>Username</FormLabel>
-                <FormControl>
-                  <Input type="text" {...field} />
-                </FormControl>
-                <FormMessage />
-              </FormItem>
-            )}
-          />
           <FormField
             control={form.control}
             name="email"
@@ -141,19 +109,19 @@ const SignUpForm = () => {
             )}
           />
           <Button
-            disabled={isSigning || isLogging}
+            disabled={isLogging || isLoading}
             type="submit"
             className="shad-button_primary"
           >
-            {(isSigning || isLogging) && <Loader />} Sign Up
+            {(isLogging || isLoading) && <Loader />} Log In
           </Button>
           <p className="text-small-regular text-light-2 text-center mt-2">
-            Already have an account ?
+            Do not have an account ?
             <Link
               className="text-primary ml-1"
-              to={'/sign-in'}
+              to={'/sign-up'}
             >
-              Log in
+              Sign up
             </Link>
           </p>
         </form>
@@ -161,4 +129,4 @@ const SignUpForm = () => {
     </Form>
   );
 };
-export default SignUpForm;
+export default SignInForm;

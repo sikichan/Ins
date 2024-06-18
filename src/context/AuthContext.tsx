@@ -38,6 +38,7 @@ const AuthContextProvider = ({
 
   const checkAuthUser = async () => {
     try {
+      setIsLoading(true)
       const currentUser = await getCurrentUser();
       if (currentUser) {
         setUser({
@@ -63,7 +64,7 @@ const AuthContextProvider = ({
     if (localStorage.getItem('cookieFallback') === '[]') {
       navigate('/sign-in');
     }
-    checkAuthUser();
+    // checkAuthUser();
   }, []);
   const value = {
     user,

@@ -1,11 +1,12 @@
 import './index.css';
 
 import { Routes, Route, Navigate } from 'react-router-dom';
-import SignInForm from '@/scenes/_auth/SignInForm.tsx';
-import SignUpForm from '@/scenes/_auth/SignUpForm.tsx';
-import AuthLayout from '@/scenes/_auth/AuthLayout.tsx';
-import RootLayout from '@/scenes/_root/RootLayout.tsx';
+import SignInForm from '@/_auth/SignInForm.tsx';
+import SignUpForm from '@/_auth/SignUpForm.tsx';
+import AuthLayout from '@/_auth/AuthLayout.tsx';
+import RootLayout from '@/_root/RootLayout.tsx';
 import { useAuthContext } from '@/context/AuthContext.tsx';
+import {Home, Saved, AllUsers, EditPost, CreatePost, PostDetails, Profile, UpdateProfile, Explore, LikedPosts} from '@/_root/pages';
 
 const App = () => {
   const { isAuthenticated } = useAuthContext();
@@ -28,7 +29,18 @@ const App = () => {
         </Route>
 
         {/*  Private */}
-        <Route path="/" element={<RootLayout />}></Route>
+        <Route element={<RootLayout />}>
+            <Route index element={<Home/>}/>
+            <Route path="/explore" element={<Explore/>}/>
+            <Route path="/all-users" element={<AllUsers/>}/>
+            <Route path="/saved" element={<Saved/>}/>
+            <Route path="/create-post" element={<CreatePost/>}/>
+            <Route path="/update-post/:id" element={<EditPost/>}/>
+            <Route path="/post/:id" element={<PostDetails/>}/>
+            <Route path="/profile/:id" element={<Profile/>}/>
+            <Route path="/update-profile/:id" element={<UpdateProfile/>}/>
+            <Route path="/liked-posts" element={<LikedPosts/>}/>
+        </Route>
       </Routes>
     </main>
   );

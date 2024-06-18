@@ -43,7 +43,7 @@ export async function createAccount(user: INewUser) {
   if (!newAccount)
     throw new Error('Please try again later');
   const newUser = await saveUserToDB({
-    imageUrl,
+    imageUrl: imageUrl.toString(),
     name: user.name,
     username: user.username,
     email: user.email,
@@ -91,9 +91,10 @@ export async function getCurrentUser() {
 
 export async function logout() {
   try {
-    await account.deleteSession('current');
+    const session = await account.deleteSession('current');
     // localStorage.removeItem('ins-session');
-    return true;
+
+    return session;
   } catch (error) {
     console.log(error);
     return false;
