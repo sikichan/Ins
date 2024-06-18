@@ -1,18 +1,10 @@
-import {Link, useNavigate} from "react-router-dom";
-import { useLogoutMutation } from '@/lib/react-query';
-import {useEffect} from "react";
+import {Link} from "react-router-dom";
 import {useAuthContext} from "@/context/AuthContext.tsx";
 import {Button} from "@/components/ui";
+import {LogoutDialog} from "@/components/shared/index.ts";
 
 const TopBar = () => {
-    const {mutate: signOut, isSuccess} = useLogoutMutation()
-    const navigate = useNavigate()
     const {user} = useAuthContext()
-    useEffect(() => {
-        if (isSuccess) {
-            navigate(0)
-        }
-    }, [isSuccess])
     return (
         <section className="top-bar">
             <div className="flex-between py-3 px-5">
@@ -22,9 +14,11 @@ const TopBar = () => {
                 </Link>
 
                 <div className="flex-center gap-4">
-                    <Button variant="ghost" onClick={() => signOut()}>
-                        <img src="/assets/icons/logout.svg" alt="logout"/>
-                    </Button>
+                    <LogoutDialog>
+                        <Button variant="ghost">
+                            <img src="/assets/icons/logout.svg" alt="logout"/>
+                        </Button>
+                    </LogoutDialog>
 
                     <Link to={`/profile/${user.id}`} className="flex-center gap-3">
                         <img src={user.imageUrl || '/assets/icons/profile-placeholder.svg'} alt="profile"
