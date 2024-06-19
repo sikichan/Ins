@@ -1,51 +1,59 @@
-import {Link, NavLink, useLocation} from "react-router-dom";
-import {useAuthContext} from "@/context/AuthContext.tsx";
-import {sidebarLinks} from '@/constants'
-import {INavLink} from "@/types";
-import {Button} from '@/components/ui'
-import {LogoutDialog} from "@/components/shared/index.ts";
+import { Link, useLocation } from 'react-router-dom';
+import { useAuthContext } from '@/context/AuthContext.tsx';
+import { sidebarLinks } from '@/constants';
+import { INavLink } from '@/types';
+import { Button } from '@/components/ui';
+import { LogoutDialog } from '@/components/shared/index.ts';
+
 const LeftSideBar = () => {
-    const {user} = useAuthContext()
-    const location = useLocation()
+  const { user } = useAuthContext();
+  const location = useLocation();
 
-    return (
-        <nav className="leftsidebar">
-            <div className="flex flex-col gap-8">
-                <Link to="/" className="flex gap-1 items-cente  font-bold">
-                    <img src="/assets/logo.png" className="w-8 h-8 rounded-full" alt="logo"/>
-                    Instagram C
-                </Link>
-                <Link to={`/profile/${user.id}`} className="flex items-center gap-3">
-                    <img src={user.imageUrl || '/assets/icons/profile-placeholder.svg'} alt="profile"
-                         className="w-12 h-12 rounded-full" />
-                    <div className="flex flex-col gap-2">
-                        <p className="text-white body-bold">{user.name}</p>
-                        <p className="text-light-3 small-regular">@{user.username}</p>
-                    </div>
-                </Link>
+  return (
+    <nav className="leftsidebar">
+      <div className="flex flex-col gap-8">
+        <Link to="/" className="flex gap-1 items-cente  font-bold">
+          <img src="/assets/logo.png" className="w-8 h-8 rounded-full" alt="logo" />
+          Instagram C
+        </Link>
+        <Link to={`/profile/${user.id}`} className="flex items-center gap-3">
+          <img
+            src={user.imageUrl || '/assets/icons/profile-placeholder.svg'}
+            alt="profile"
+            className="w-12 h-12 rounded-full"
+          />
+          <div className="flex flex-col gap-2">
+            <p className="text-white body-bold">{user.name}</p>
+            <p className="text-light-3 small-regular">@{user.username}</p>
+          </div>
+        </Link>
 
-                <ul className="flex flex-col gap-6">
-                    {
-                        sidebarLinks.map((item: INavLink) => {
-                            const isActive = location.pathname === item.route
-                            return <li key={item.label} className={`leftsidebar-link group ${isActive && 'bg-primary'}`}>
-                                <NavLink to={item.route} className="flex gap-4 p-3 items-center">
-                                    <img src={item.imgURL} alt={item.label} className={`group-hover:invert-white ${isActive && 'invert-white'}`}/>
-                                    {item.label}
-                                </NavLink>
-                            </li>
-                        })
-                    }
-                </ul>
-            </div>
-            <LogoutDialog>
-                <Button variant="ghost" className="shad-button_ghost">
-                    <img src="/assets/icons/logout.svg" alt="logout"/>
-                    Logout
-                </Button>
-            </LogoutDialog>
-        </nav>
-    );
-}
+        <ul className="flex flex-col gap-6">
+          {sidebarLinks.map((item: INavLink) => {
+            const isActive = location.pathname === item.route;
+            return (
+              <li key={item.label} className={`leftsidebar-link group ${isActive && 'bg-primary'}`}>
+                <Link to={item.route} className="flex gap-4 p-3 items-center">
+                  <img
+                    src={item.imgURL}
+                    alt={item.label}
+                    className={`group-hover:invert-white ${isActive && 'invert-white'}`}
+                  />
+                  {item.label}
+                </Link>
+              </li>
+            );
+          })}
+        </ul>
+      </div>
+      <LogoutDialog>
+        <Button variant="ghost" className="shad-button_ghost">
+          <img src="/assets/icons/logout.svg" alt="logout" />
+          Logout
+        </Button>
+      </LogoutDialog>
+    </nav>
+  );
+};
 
 export default LeftSideBar;
