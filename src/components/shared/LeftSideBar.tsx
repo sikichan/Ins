@@ -23,7 +23,7 @@ const LeftSideBar = () => {
             className="w-12 h-12 rounded-full"
           />
           <div className="flex flex-col gap-2">
-            <p className="text-white body-bold">{user.name}</p>
+            <p className="body-bold">{user.name}</p>
             <p className="text-light-3 small-regular">@{user.username}</p>
           </div>
         </Link>

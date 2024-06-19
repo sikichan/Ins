@@ -27,6 +27,7 @@
     --input: 220 13% 91%;
     --ring: 262.1 83.3% 57.8%;
     --radius: 0.3rem;
+    @apply bg-light-1 text-dark-1;
   }
   
   .dark {
@@ -49,8 +50,10 @@
     --border: 215 27.9% 16.9%;
     --input: 215 27.9% 16.9%;
     --ring: 263.4 70% 50.4%;
+    @apply bg-dark-1 text-light-1;
   }
 }
+
 
 @layer utilities {
   /* TYPOGRAPHY */
@@ -226,7 +229,7 @@
   
   /* Bottom bar */
   .bottom-bar {
-    @apply z-50 flex-between w-full fixed bottom-0 rounded-t-[20px] bg-dark-2 px-5 py-4 md:hidden;
+    @apply z-50 flex-between w-full sticky bottom-0 rounded-t-[20px] bg-dark-2 px-5 py-4 md:hidden;
   }
   
   /* File uploader */
@@ -239,7 +242,7 @@
   }
   
   .file_uploader-box {
-    @apply flex-center flex-col p-7 h-80 lg:h-[612px];
+    @apply flex-center flex-col p-7 h-60 lg:h-[412px];
   }
   
   /* Grid Post List */
@@ -285,5 +288,9 @@
   
   .shad-button_ghost {
     @apply flex gap-4 items-center justify-start hover:bg-transparent hover:text-white !important;
+  }
+  
+  .shad-input {
+    @apply dark:text-light-1 text-dark-1;
   }
 }
