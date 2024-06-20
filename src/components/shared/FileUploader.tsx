@@ -33,7 +33,7 @@ const FileUploader = ({ fieldChange, mediaUrl }: FileUploaderProps) => {
     <div {...getRootProps()} className="flex flex-center flex-col bg-dark-3 rounded-xl cursor-pointer">
       <input {...getInputProps()} className="cursor-pointer" />
       {/*{isDragActive ? <p>Drop the files here ...</p> : <p>Drag 'n' drop some files here, or click to select files</p>}*/}
-      {fileUrl.length > 0 ? (
+      {fileUrl && fileUrl.length > 0 ? (
         <>
           <div className="grid grid-cols-2 md:grid-cols-3 gap-2 w-full p-2">
             {fileUrl.map((url: string, index: number) => (

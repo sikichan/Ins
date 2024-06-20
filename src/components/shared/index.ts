@@ -5,3 +5,6 @@ export { default as BottomBar } from './BottomBar.tsx';
 export { default as LogoutDialog } from './LogoutDialog.tsx';
 export { default as PostForm } from './PostForm.tsx';
 export { default as FileUploader } from './FileUploader.tsx';
+export { default as PostCard } from './PostCard.tsx';
+export { default as PostStats } from './PostStats.tsx';
+export { default as UserCard } from './UserCard.tsx';
