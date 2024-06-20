@@ -5,11 +5,19 @@ import { Button, Form, FormControl, FormField, FormItem, FormLabel, FormMessage,
 import { FileUploader } from '@/components/shared';
 import { PostValidation } from '@/lib/validation';
 import { Models } from 'appwrite';
+import { useCreatePost } from '@/lib/react-query';
+import { useAuthContext } from '@/context/AuthContext.tsx';
+import { useToast } from '@/components/ui';
+import { useNavigate } from 'react-router-dom';
 
-type PostFormProps = {
+export type PostFormProps = {
   post?: Models.Document;
 };
 const PostForm = ({ post }: PostFormProps) => {
+  const { mutateAsync: createPost, isPending } = useCreatePost();
+  const { user } = useAuthContext();
+  const { toast } = useToast();
+  const navigate = useNavigate();
   const form = useForm<z.infer<typeof PostValidation>>({
     resolver: zodResolver(PostValidation),
     defaultValues: {
@@ -19,7 +27,14 @@ const PostForm = ({ post }: PostFormProps) => {
       tags: post ? post.tags.join(',') : '',
     },
   });
-  const onSubmit = () => {};
+  const onSubmit = async (values: z.infer<typeof PostValidation>) => {
+    console.log(values);
+    const newPost = await createPost({ ...values, userId: user.id });
+    if (!newPost) {
+      return toast({ title: 'Please Try Again Later' });
+    }
+    navigate('/');
+  };
   return (
     <Form {...form}>
       <form onSubmit={form.handleSubmit(onSubmit)} className="flex flex-col gap-5 w-full max-w-5xl">
@@ -79,7 +94,9 @@ const PostForm = ({ post }: PostFormProps) => {
           <Button type="button" variant="outline">
             Cancel
           </Button>
-          <Button type="submit">Submit</Button>
+          <Button type="submit" disabled={isPending}>
+            Submit
+          </Button>
         </div>
       </form>
     </Form>
