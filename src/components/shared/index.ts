@@ -8,3 +8,4 @@ export { default as FileUploader } from './FileUploader.tsx';
 export { default as PostCard } from './PostCard.tsx';
 export { default as PostStats } from './PostStats.tsx';
 export { default as UserCard } from './UserCard.tsx';
+export { default as GridPostList } from './GridPostList.tsx';

@@ -57,6 +57,7 @@ module.exports = {
         'light-4': '#5C5C7B',
       },
       screens: {
+        xs: '540px',
         sm: '640px',
         md: '768px',
         lg: '1024px',

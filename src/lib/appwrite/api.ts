@@ -197,7 +197,17 @@ export async function getPostById(postId?: string) {
     console.log(error);
   }
 }
+export async function getUserById(userId: string) {
+  try {
+    const user = await databases.getDocument(appWriteConfig.databaseId, appWriteConfig.usersCollectionId, userId);
 
+    if (!user) throw Error;
+
+    return user;
+  } catch (error) {
+    console.log(error);
+  }
+}
 // export async function updatePost(post: IUpdatePost) {
 //   const hasFileToUpdate = post.file.length > 0;
 //

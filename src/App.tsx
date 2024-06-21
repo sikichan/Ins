@@ -6,7 +6,7 @@ import SignUpForm from '@/_auth/SignUpForm.tsx';
 import AuthLayout from '@/_auth/AuthLayout.tsx';
 import RootLayout from '@/_root/RootLayout.tsx';
 import { useAuthContext } from '@/context/AuthContext.tsx';
-import { Home, Saved, AllUsers, EditPost, CreatePost, PostDetails, Profile, UpdateProfile, Explore, LikedPosts } from '@/_root/pages';
+import { Home, Saved, AllUsers, EditPost, CreatePost, PostDetails, Profile, UpdateProfile, Explore } from '@/_root/pages';
 
 const App = () => {
   const { isAuthenticated } = useAuthContext();
@@ -27,10 +27,9 @@ const App = () => {
           <Route path="/saved" element={<Saved />} />
           <Route path="/create-post" element={<CreatePost />} />
           <Route path="/update-post/:id" element={<EditPost />} />
-          <Route path="/post/:id" element={<PostDetails />} />
-          <Route path="/profile/:id" element={<Profile />} />
+          <Route path="/posts/:id" element={<PostDetails />} />
+          <Route path="/profile/:id/*" element={<Profile />} />
           <Route path="/update-profile/:id" element={<UpdateProfile />} />
-          <Route path="/liked-posts" element={<LikedPosts />} />
         </Route>
       </Routes>
     </main>
