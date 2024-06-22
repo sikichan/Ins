@@ -1,6 +1,7 @@
 import { useCallback, useState } from 'react';
 import { FileWithPath, useDropzone } from 'react-dropzone';
 import { Button } from '@/components/ui';
+import { useTranslation } from 'react-i18next';
 
 type FileUploaderProps = {
   fieldChange: (files: File[]) => void;
@@ -8,6 +9,7 @@ type FileUploaderProps = {
 };
 const FileUploader = ({ fieldChange, mediaUrl }: FileUploaderProps) => {
   const [file, setFile] = useState<File[]>([]);
+  const { t } = useTranslation();
   const [fileUrl, setFileUrl] = useState<string[]>(mediaUrl);
   const onDrop = useCallback(
     (acceptedFiles: FileWithPath[]) => {
@@ -40,15 +42,15 @@ const FileUploader = ({ fieldChange, mediaUrl }: FileUploaderProps) => {
               <img key={index} src={url} alt="photo" className="file_uploader-img w-full h-[200px] md:h-[300px] " />
             ))}
           </div>
-          <p className="file_uploader-label">Click or drag photo to replace</p>
+          <p className="file_uploader-label">{t('create.uploaddesc')}</p>
         </>
       ) : (
         <div className="file_uploader-box">
           <img src="/assets/icons/file-upload.svg" width={96} height={77} alt="upload" />
-          <h3 className="text-light-3 mb-2 mt-6">Drag photo here</h3>
+          <h3 className="text-light-3 mb-2 mt-6">{t('create.desc')}</h3>
           <p className="text-light-4 small-regular mb-6">SVG,PNG,JPG</p>
           <Button type="button" variant="secondary">
-            Select from local
+            {t('create.photobtn')}
           </Button>
         </div>
       )}

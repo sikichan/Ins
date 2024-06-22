@@ -2,16 +2,17 @@ import { Models } from 'appwrite';
 
 import { GridPostList, Loader } from '@/components/shared';
 import { useGetCurrentUser } from '@/lib/react-query/index.ts';
+import { useTranslation } from 'react-i18next';
 
 const Saved = () => {
   const { data: currentUser } = useGetCurrentUser();
-
+  const { t } = useTranslation();
   const savePosts = currentUser?.save
     .map((savePost: Models.Document) => ({
       ...savePost.post,
-      creator: {
-        imageUrl: currentUser.imageUrl,
-      },
+      // creator: {
+      //   imageUrl: currentUser.imageUrl,
+      // },
     }))
     .reverse();
 
@@ -19,7 +20,7 @@ const Saved = () => {
     <div className="saved-container">
       <div className="flex gap-2 w-full max-w-5xl">
         <img src="/assets/icons/save.svg" width={36} height={36} alt="edit" className="invert-white" />
-        <h2 className="h3-bold md:h2-bold text-left w-full">Saved Posts</h2>
+        <h2 className="h3-bold md:h2-bold text-left w-full">{t('savedposts')}</h2>
       </div>
 
       {!currentUser ? (

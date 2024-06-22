@@ -1,0 +1,33 @@
+{
+    "home": "主页",
+    "explore": "探索",
+    "people": "用户",
+    "saved": "收藏",
+    "createpost": "创建帖子",
+    "logout": "登出",
+    "topcreators": "顶级创作者",
+    "homefeed": "主页",
+    "searchpost": "搜索帖子",
+    "searchpostplaceholder": "输入标题以搜索帖子",
+    "popular": "今天热门",
+    "allusers": "所有用户",
+    "savedposts": "收藏的帖子",
+    "create":{
+        "caption": "标题",
+        "addphotos": "添加照片",
+        "addlocation": "添加定位",
+        "addtags": "添加标签",
+        "tagdesc": "以英文逗号分隔开 \" , \"",
+        "photobtn": "选择本地文件",
+        "uploaddesc": "点击或拖拽到此处进行替换",
+        "desc": "拖拽图片到此处上传"
+    },
+    "cancel": "取消",
+    "submit": "提交",
+    "mini": {
+        "home": "主页",
+        "explore": "探索",
+        "saved": "收藏",
+        "create": "创建"
+    }
+}

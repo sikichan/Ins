@@ -5,6 +5,7 @@ import { Input } from '@/components/ui';
 import useDebounce from '@/hooks/useDebounce';
 import { GridPostList, Loader } from '@/components/shared';
 import { useGetPosts, useSearchPosts } from '@/lib/react-query/index.ts';
+import { useTranslation } from 'react-i18next';
 
 export type SearchResultProps = {
   isSearchFetching: boolean;
@@ -23,6 +24,7 @@ const SearchResults = ({ isSearchFetching, searchedPosts }: SearchResultProps) =
 
 const Explore = () => {
   const { ref, inView } = useInView();
+  const { t } = useTranslation();
   const { data: posts, fetchNextPage, hasNextPage } = useGetPosts();
 
   const [searchValue, setSearchValue] = useState('');
@@ -48,12 +50,12 @@ const Explore = () => {
   return (
     <div className="explore-container">
       <div className="explore-inner_container">
-        <h2 className="h3-bold md:h2-bold w-full">Search Posts</h2>
+        <h2 className="h3-bold md:h2-bold w-full">{t('searchpost')}</h2>
         <div className="flex gap-1 px-4 w-full rounded-lg border border-gray-200">
           <img src="/assets/icons/search.svg" width={24} height={24} alt="search" />
           <Input
             type="text"
-            placeholder="Search Post By Entering The Caption"
+            placeholder={t('searchpostplaceholder')}
             className="explore-search"
             value={searchValue}
             onChange={(e) => {
@@ -65,7 +67,7 @@ const Explore = () => {
       </div>
 
       <div className="flex-between w-full max-w-5xl mt-16 mb-7">
-        <h3 className="body-bold md:h3-bold">Popular Today</h3>
+        <h3 className="body-bold md:h3-bold">{t('popular')}</h3>
 
         <div className="flex-center gap-3 bg-dark-3 rounded-xl px-4 py-2 cursor-pointer">
           <p className="small-medium md:base-medium text-light-2">All</p>

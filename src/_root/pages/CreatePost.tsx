@@ -1,12 +1,14 @@
 import { PostForm } from '@/components/shared';
+import { useTranslation } from 'react-i18next';
 
 const CreatePost = () => {
+  const { t } = useTranslation();
   return (
     <div className="flex flex-1">
       <div className="common-container">
         <div className="max-w-5xl flex-start gap-3 justify-start w-full">
           <AddPostSvg />
-          <h2 className="h3-bold md:h2-bold text-left w-full">Create Post</h2>
+          <h2 className="h3-bold md:h2-bold text-left w-full">{t('createpost')}</h2>
         </div>
         <PostForm />
       </div>
@@ -15,14 +17,7 @@ const CreatePost = () => {
 };
 const AddPostSvg = () => {
   return (
-    <svg
-      className="dark:text-light-1 text-dark-1"
-      width="36"
-      height="36"
-      viewBox="0 0 36 36"
-      fill="currentColor"
-      xmlns="http://www.w3.org/2000/svg"
-    >
+    <svg className="dark:text-light-1 text-dark-1" width="36" height="36" viewBox="0 0 36 36" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
       <path
         fillRule="evenodd"
         clipRule="evenodd"

@@ -1,0 +1,33 @@
+{
+    "home": "Home",
+    "explore": "Explore",
+    "people": "People",
+    "saved": "Saved",
+    "createpost": "Create Post",
+    "logout": "Logout",
+    "topcreators": "Top Creators",
+    "homefeed": "Home Feed",
+    "searchpost": "Search post",
+    "searchpostplaceholder": "Search Post By Entering The Caption",
+    "popular": "Popular Today",
+    "allusers": "All users",
+    "savedposts": "Saved posts",
+    "create":{
+        "caption": "Caption",
+        "addphotos": "Add Photos",
+        "addlocation": "Add Location",
+        "addtags": "Add Tags",
+        "tagdesc": "separated by comma \" , \"",
+        "photobtn": "Select from local",
+        "uploaddesc": "Click or drag photo to replace",
+        "desc": "Drag photo here"
+    },
+    "cancel": "Cancel",
+    "submit": "Submit",
+    "mini": {
+        "home": "Home",
+        "explore": "Explore",
+        "saved": "Saved",
+        "create": "Create"
+    }
+}

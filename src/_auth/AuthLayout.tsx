@@ -10,7 +10,7 @@ const AuthLayout = () => {
       <section className="flex flex-col flex-1 justify-center items-center">
         <Outlet />
       </section>
-      <img src="/assets/side-img.svg" alt="logo" className="hidden xl:block w-1/2 h-screen bg-no-repeat object-cover" />
+      <img src="/assets/side-img.png" alt="logo" className="hidden xl:block w-1/2 h-screen bg-no-repeat object-cover" />
     </>
   );
 };

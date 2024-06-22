@@ -2,10 +2,11 @@ import { Models } from 'appwrite';
 
 import { Loader, PostCard, UserCard } from '@/components/shared';
 import { useGetRecentPosts, useGetUsers } from '@/lib/react-query/index.ts';
+import { useTranslation } from 'react-i18next';
 
 const Home = () => {
   // const { toast } = useToast();
-
+  const { t } = useTranslation();
   const { data: posts, isLoading: isPostLoading, isError: isErrorPosts } = useGetRecentPosts();
   const { data: creators, isLoading: isUserLoading, isError: isErrorCreators } = useGetUsers(10);
   // console.log(isErrorPosts, isErrorCreators);
@@ -26,7 +27,7 @@ const Home = () => {
     <div className="flex flex-1">
       <div className="home-container">
         <div className="home-posts">
-          <h2 className="h3-bold md:h2-bold text-left w-full">Home Feed</h2>
+          <h2 className="h3-bold md:h2-bold text-left w-full">{t('homefeed')}</h2>
           {isPostLoading && !posts ? (
             <Loader />
           ) : (
@@ -42,7 +43,7 @@ const Home = () => {
       </div>
 
       <div className="home-creators">
-        <h3 className="h3-bold text-light-1">Top Creators</h3>
+        <h3 className="h3-bold text-light-1">{t('topcreators')}</h3>
         {isUserLoading && !creators ? (
           <Loader />
         ) : (
